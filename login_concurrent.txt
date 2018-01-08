@@ -1,0 +1,27 @@
+#
+# create a single user
+create user1 user1 100
+login user1 user1
+quit
+*
+#
+Created user user1
+Logged in as user1
+Goodbye
+|
+Created user user1
+Logged in as user1
+Goodbye
+*
+#
+# Person 1 logs into user1
+login user1 user1
+quit
+*
+#
+Logged in as user1
+Goodbye
+|
+Login failed
+Goodbye
+*

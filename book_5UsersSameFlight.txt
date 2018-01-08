@@ -1,0 +1,62 @@
+# This tests two users trying to book the same flight with a max capacity of 5.
+# So both users should be successful.
+#
+# user 1
+create user1 user1 10000
+login user1 user1
+search "Seattle WA" "Boston MA" 1 10 1
+book 0
+quit
+*
+#
+# expected printouts for user 1
+#
+# first scenario: user 1 succeeds first, user 2 succeeds second
+#
+Created user user1
+Logged in as user1
+Itinerary 0: 1 flight(s), 309.0 minutes
+ID: 708454 Date: 2015-7-10 Carrier: AS Number: 734 Origin: Seattle WA Dest: Boston MA Duration: 309.0 Capacity: 5 Price: 677.59
+Booked flight(s), reservation ID: 1
+Goodbye
+|
+#
+# second scenario: user 1 succeeds second, user1 succeeds first
+#
+Created user user1
+Logged in as user1
+Itinerary 0: 1 flight(s), 309.0 minutes
+ID: 708454 Date: 2015-7-10 Carrier: AS Number: 734 Origin: Seattle WA Dest: Boston MA Duration: 309.0 Capacity: 5 Price: 677.59
+Booked flight(s), reservation ID: 2
+Goodbye
+#
+*
+#
+# similarly for user 2
+#
+create user2 user2 10000
+login user2 user2
+search "Seattle WA" "Boston MA" 1 10 1
+book 0
+quit
+*
+#
+# first scenario: user 1 succeeds first, user 2 succeeds second
+#
+Created user user2
+Logged in as user2
+Itinerary 0: 1 flight(s), 309.0 minutes
+ID: 708454 Date: 2015-7-10 Carrier: AS Number: 734 Origin: Seattle WA Dest: Boston MA Duration: 309.0 Capacity: 5 Price: 677.59
+Booked flight(s), reservation ID: 2
+Goodbye
+|
+#
+# second scenario: user 1 succeeds second, user1 succeeds first
+#
+Created user user2
+Logged in as user2
+Itinerary 0: 1 flight(s), 309.0 minutes
+ID: 708454 Date: 2015-7-10 Carrier: AS Number: 734 Origin: Seattle WA Dest: Boston MA Duration: 309.0 Capacity: 5 Price: 677.59
+Booked flight(s), reservation ID: 1
+Goodbye
+*
